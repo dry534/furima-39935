@@ -1,24 +1,53 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
 
-* Ruby version
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| name               | string | null: false |
+| first_name         | string | null: false |
+| family_name        | string | null: false |
+| family_name_kana   | string | null: false |
+| first_name_kana    | string | null: false |
+| birthday           | string | null: false |
+| encrypted_password | string | null: false |
 
-* System dependencies
 
-* Configuration
+- has_many :items
+- belongs_to :address
 
-* Database creation
+## items テーブル
 
-* Database initialization
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item name          | string     | null: false                    |
+| detail             | text       | null: false                    |
+| location           | string     | null: false                    |
+| prise              | string     | null: false                    |
+| situation          | string     | null: false                    |
+| delivery_days      | string     | null: false                    |
+| load_style         | string     | null: false                    |
+| category           | string     | null: false                    |
+| location           | string     | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* How to run the test suite
+- belongs_to :users
+- belongs_to :address
 
-* Services (job queues, cache servers, search engines, etc.)
+## address テーブル
 
-* Deployment instructions
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| post_code          | text       | null: false                    |
+| prefecture         | string     | null: false                    |
+| city               | string     | null: false                    |
+| block              | string     | null: false                    |
+| bill_name          | string     | null: false                    |
 
-* ...
+
+- belongs_to :users
+- belongs_to :items
