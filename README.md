@@ -18,7 +18,6 @@
 
 
 - has_many :items
-- has_many
 
 ## items テーブル
 
