@@ -18,7 +18,7 @@
 
 
 - has_many :items
-- belongs_to :address
+- has_many
 
 ## items テーブル
 
@@ -36,7 +36,7 @@
 | user               | references | null: false, foreign_key: true |
 
 - belongs_to :users
-- belongs_to :address
+- has_one :address
 
 ## address テーブル
 
