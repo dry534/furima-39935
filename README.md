@@ -26,11 +26,12 @@
 | detail             | text       | null: false                    |
 | price              | integer    | null: false                    |
 | situation_id       | integer    | null: false                    |
-| delivery_day_id    | integer    | null: false                     |
+| delivery_day_id    | integer    | null: false                    |
 | load_style_id      | integer    | null: false                    |
 | category_id        | integer    | null: false                    |
 | prefecture_id      | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
+| buying_history     | references | null: false, foreign_key: true |
 
 - belongs_to :user
 - has_one :buying_history
@@ -47,7 +48,6 @@
 | bill_name          | string     |                                |
 | phone_number       | string     | null: false                    |
 
-- belongs_to :item
 
 
 ## buying_historiesテーブル
@@ -59,3 +59,4 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one : address
