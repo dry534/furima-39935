@@ -31,11 +31,11 @@
 | category_id        | integer    | null: false                    |
 | prefecture_id      | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
-| buying_history     | references | null: false, foreign_key: true |
+
 
 - belongs_to :user
 - has_one :buying_history
-- has_one address
+
 
 ## addresses テーブル
 
@@ -47,8 +47,9 @@
 | block              | string     | null: false                    |
 | bill_name          | string     |                                |
 | phone_number       | string     | null: false                    |
+| buying_history     | references | null: false, foreign_key: true |
 
-
+- belongs_to :buying_history
 
 ## buying_historiesテーブル
 
@@ -59,4 +60,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one : address
+- has_one :address
