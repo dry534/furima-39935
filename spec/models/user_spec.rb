@@ -116,5 +116,12 @@ it 'birthdayが空では登録できない' do
     end
   
     context '正常系' do
+
+      it '適切な値を入力すればuserを登録できる' do
+        user = FactoryBot.build(:user)
+        expect(user).to be_valid
+      end
+
+      
   end
 end
