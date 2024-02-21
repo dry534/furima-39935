@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
@@ -79,9 +80,9 @@ RSpec.describe User, type: :model do
 end
 
 it 'family_nameに半角文字が含まれていると登録できない' do
-  @user.last_name = 'Yamada1'
+  @user.family_name = 'Yamada1'
   expect(@user).not_to be_valid
-  expect(@user.errors[:last_name]).to include("is invalid")
+  expect(@user.errors[:family_name]).to include("is invalid")
 end
 
 it 'first_name_kanaが空では登録できない' do
@@ -121,7 +122,7 @@ it 'birthdayが空では登録できない' do
         user = FactoryBot.build(:user)
         expect(user).to be_valid
       end
+    end
 
-      
   end
 end
