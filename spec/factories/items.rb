@@ -8,5 +8,6 @@ FactoryBot.define do
     load_style_id              { '2' }
     category_id              { '2' }
     prefecture_id              { '2' }
+    association :user
   end
 end
