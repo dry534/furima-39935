@@ -19,4 +19,8 @@ class Item < ApplicationRecord
   validates :category_id, numericality: { other_than: 1 } 
   validates :prefecture_id, numericality: { other_than: 1 } 
 
+  def empty?
+    attributes.except('id', 'created_at', 'updated_at').all? { |_, v| v.nil? || v == '' }
+  end
+
 end
