@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :noedit, only: :edit
+
   def index
     @items = Item.order(created_at: :desc)
   end
@@ -41,5 +43,9 @@ end
     params.require(:item).permit(:item_name, :detail, :price, :image, :situation_id, :delivery_day_id, :load_style_id, :category_id, :prefecture_id).merge(user_id: current_user.id)
    end
 
-
+   def noedit
+    unless user_signed_in? && current_user == Item.find(params[:id]).user
+    redirect_to action: :index
+    end
+  end
 end
