@@ -1,6 +1,5 @@
-window.addEventListener("DOMContentLoaded", () => {
+const price =  () => {
   if ( document.getElementById('item-price')!= null) {
-    // 読み込まれたページに'item-price'というid名の要素があれば発火
     const priceInput = document.getElementById("item-price");
     const addTaxDom = document.getElementById("add-tax-price");
     const profitDom = document.getElementById("profit");
@@ -12,4 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
         profitDom.innerHTML = Math.ceil(inputValue * 0.9).toLocaleString();
     })
   }
-});
+};
+
+window.addEventListener("turbo:load", price);
+window.addEventListener("turbo:render", price);
