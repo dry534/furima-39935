@@ -1,14 +1,15 @@
 class OrdersController < ApplicationController
-
+  before_action :no_order, only: :index
+  before_action :no_buy, only: :index
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order = Order.new
-    @item = Item.find(params[:item_id])
+    find_item
     noedit
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    find_item
     @order = Order.new(order_params)
     if @order.valid?
       pay_item
@@ -42,6 +43,21 @@ def noedit
   end
  end
 
+ def no_order
+  unless user_signed_in?
+  redirect_to root_path
+  end
+ end
 
+ def no_buy
+  find_item
+  if Item.exists?(id: @item) && BuyingHistory.where(item_id: @item).exists?
+    redirect_to root_path
+ end
+end
+
+ def find_item
+  @item = Item.find(params[:item_id])
+end
 
 end

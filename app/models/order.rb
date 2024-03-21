@@ -11,10 +11,9 @@ class Order
   validates :token, presence: true
   validates :user_id,  presence: true
   validates :item_id,  presence: true
-  validates :buying_history_id,  presence: true
 
   def save
- order = BuyingHistory.create(item_id:item_id, user_id: user_id)
+ order = BuyingHistory.create(item_id: item_id, user_id: user_id)
  Address.create(post_code: post_code, prefecture_id: prefecture_id, city: city, block: block, building_name: building_name, phone_number: phone_number, buying_history_id: order.id)
   end
 
