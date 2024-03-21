@@ -44,6 +44,12 @@ RSpec.describe Order, type: :model do
     end
   end
     context '正常系' do
+      before do
+        @user = FactoryBot.create(:user)
+        @item = FactoryBot.create(:item)
+        @order_address.user_id = @user.id 
+        @order_address.item_id = @item.id 
+      end
       it 'building_nameが空でも登録できる' do
       @order_address.building_name = ''
       expect(@order_address).to be_valid
