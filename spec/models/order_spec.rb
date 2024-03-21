@@ -48,11 +48,17 @@ RSpec.describe Order, type: :model do
       end
     end
 
+
     context '正常系' do
       it 'building_nameが空でも登録できる' do
         @order_address.building_name = ''
         expect(@order_address).to be_valid
       end
+
+      it 'すべての値が存在する際に登録できる' do
+        expect(@order_address).to be_valid
+      end
+
     end
   end
 end
