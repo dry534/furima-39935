@@ -48,6 +48,18 @@ RSpec.describe Order, type: :model do
       end
     end
 
+    it 'user_idが空では登録できない' do
+      @order_address.user_id = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include "User can't be blank"
+    end
+
+    it 'item_idが空では登録できない' do
+      @order_address.item_id = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include "Item can't be blank"
+    end
+
 
     context '正常系' do
       it 'building_nameが空でも登録できる' do
