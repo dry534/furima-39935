@@ -17,6 +17,12 @@ RSpec.describe Order, type: :model do
         expect(@order_address.errors.full_messages).to include "Post code can't be blank"
       end
 
+      it 'post_codeが半角ハイフンを含む形でなければ登録できない' do
+        @order_address.post_code = '1234567' # ハイフンを含まない形式
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include "Post code is invalid"
+      end
+
       it 'prefecture_idが空では登録できない' do
         @order_address.prefecture_id = 1
         @order_address.valid?
@@ -39,6 +45,24 @@ RSpec.describe Order, type: :model do
         @order_address.phone_number = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include "Phone number can't be blank"
+      end
+
+      it 'phone_numberが9桁以下では登録できない' do
+        @order_address.phone_number = '123456789'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include "Phone number is invalid"
+      end
+
+      it 'phone_numberが12桁以上では登録できない' do
+        @order_address.phone_number = '123456789012'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include "Phone number is invalid"
+      end
+
+      it 'phone_numberに半角数字以外が含まれている場合は登録できない' do
+        @order_address.phone_number = '123-4567-8901'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include "Phone number is invalid"
       end
 
       it 'tokenが空では登録できない' do
