@@ -1,15 +1,15 @@
 class OrdersController < ApplicationController
   before_action :no_order, only: :index
   before_action :no_buy, only: :index
+  before_action :find_item, only: :index, :create
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order = Order.new
-    find_item
     noedit
   end
 
   def create
-    find_item
     @order = Order.new(order_params)
     if @order.valid?
       pay_item
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   end
 
 def noedit
-  if user_signed_in? && current_user == Item.find(params[:item_id]).user
+  if user_signed_in? && current_user == @item.user
   redirect_to root_path
   end
  end
