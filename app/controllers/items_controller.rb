@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :noedit, only: :edit
+  before_action :noedit_user, only: :edit
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -53,6 +54,13 @@ end
     redirect_to action: :index
     end
    end
+
+   def noedit_user
+    find_item
+    if current_user != @item.user ||  Item.exists?(id: @item.id) && BuyingHistory.where(item_id: @item.id).exists?
+      redirect_to root_path
+    end
+  end
 
   def find_item
     @item = Item.find(params[:id])
