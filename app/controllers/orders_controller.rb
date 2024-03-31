@@ -45,9 +45,11 @@ class OrdersController < ApplicationController
 
  def no_buy
   find_item
-  if Item.exists?(id: @item) && BuyingHistory.where(item_id: @item).exists?
+  if user_signed_in? && @item.user_id == current_user.id
     redirect_to root_path
- end
+  elsif Item.exists?(id: @item) && BuyingHistory.where(item_id: @item).exists?
+    redirect_to root_path
+  end
 end
 
  def find_item
