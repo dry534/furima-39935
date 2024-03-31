@@ -19,6 +19,7 @@ class Item < ApplicationRecord
   validates :load_style_id, numericality: { other_than: 1 } 
   validates :category_id, numericality: { other_than: 1 } 
   validates :prefecture_id, numericality: { other_than: 1 } 
+  validates :image, presence: true
 
   def empty?
     attributes.except('id', 'created_at', 'updated_at').all? { |_, v| v.nil? || v == '' }
