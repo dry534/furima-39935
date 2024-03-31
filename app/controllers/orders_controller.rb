@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
   before_action :no_order, only: :index
   before_action :no_buy, only: :index
-  before_action :find_item, only: :index, :create
+  before_action :find_item, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order = Order.new
-    noedit
+    no_order
   end
 
   def create
@@ -36,11 +36,6 @@ class OrdersController < ApplicationController
     )
   end
 
-def noedit
-  if user_signed_in? && current_user == @item.user
-  redirect_to root_path
-  end
- end
 
  def no_order
   unless user_signed_in?
